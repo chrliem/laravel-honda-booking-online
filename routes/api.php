@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('booking','Api\BookingController@index');
 Route::get('booking/{id}','Api\BookingController@show');
+Route::get('booking-filtered/{id}','Api\DealerController@show');
 Route::post('booking','Api\BookingController@create');
 Route::post('booking/{id}','Api\BookingController@update');
 Route::post('booking-status/{id}','Api\BookingController@changeStatus');
