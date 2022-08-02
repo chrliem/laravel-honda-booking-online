@@ -47,8 +47,6 @@ Route::get('test-broadcast-event', function(){
         'keterangan_customer'=>'Tidak ada'
     ];
 
-    BookingAdded::dispatch($data);
-    echo 'Berhasil';
 });
 
 //Untuk testing layout email
