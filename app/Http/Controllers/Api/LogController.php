@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Log;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class LogController extends Controller
 {
@@ -12,10 +14,7 @@ class LogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use App\Mail\NotificationEmail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\LogController;
 use App\Models\Booking;
 use App\Models\Dealer;
+use App\Models\Kendaraan;
 use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Validator;
+use App\Events\BookingAdded;
 
 class BookingController extends Controller
 {
@@ -41,13 +45,13 @@ class BookingController extends Controller
         //Validasi inputan data
         $validate = Validator::make($newBooking, [
             'nama_customer'=>'required',
-            'email',
+            'email_customer',
             'no_handphone'=>'required|numeric|digits_between:1,13|regex:/^((08))/',
             'no_polisi'=>'required',
             'id_kendaraan'=>'required',
             'jenis_transmisi'=>'required',
             'id_dealer'=>'required',
-            'tgl_booking'=>'required',
+            'tgl_service'=>'required',
             'jenis_pekerjaan'=>'required',
             'jenis_layanan'=>'required'
         ],['nama_customer.required'=>'Nama lengkap wajib diisi',
@@ -58,7 +62,7 @@ class BookingController extends Controller
         'id_kendaraan.required'=>'Model kendaraan wajib diisi',
         'jenis_transmisi.required'=>'Jenis transmisi kendaraan wajib diisi',
         'id_dealer.required'=>'Pilihan dealer wajib diisi',
-        'tgl_booking.required'=>'Tanggal dan Jam Booking wajib diisi',
+        'tgl_service.required'=>'Tanggal service wajib diisi',
         'jenis_kendaraan.required'=>'Jenis pekerjaan wajib diisi',
         'jenis_layanan.required'=>'Jenis layanan wajib diisi']);
 
@@ -97,6 +101,33 @@ class BookingController extends Controller
         $log['detail_log'] = $booking->nama_customer.' membuat booking pada '.$booking->created_at;
         Log::create($log);
 
+        //Get kendaraan
+        $kendaraan = Kendaraan::find($request->id_kendaraan);
+
+        //Send email
+        $data = [
+            'kode_booking'=>$newBooking['kode_booking'],
+            'nama_customer'=>$newBooking['nama_customer'],
+            'email_customer'=>$newBooking['email_customer'],
+            'no_handphone'=>$newBooking['no_handphone'],
+            'no_polisi'=> $newBooking['no_polisi'],
+            'model_kendaraan'=>$kendaraan->model_kendaraan,
+            'jenis_transmisi'=>$newBooking['jenis_transmisi'],
+            'kode_dealer'=>$dealer->kode_dealer,
+            'nama_dealer'=>$dealer->nama_dealer,
+            'tgl_service'=>$newBooking['tgl_service'],
+            'jenis_pekerjaan'=>$newBooking['jenis_pekerjaan'],
+            'jenis_layanan'=>$newBooking['jenis_layanan'],
+            'keterangan_customer'=>$newBooking['keterangan_customer']
+        ];
+        $users = User::all();
+        foreach($users as $recipient){
+            Mail::to($recipient->email)->send(new NotificationEmail($data));
+        }
+        
+        //Tidak jadi digunakan
+        // broadcast(new BookingAdded($data));
+
         return response([
             'message'=>'Booking berhasil dibuat',
             'data'=>$booking
@@ -118,7 +149,7 @@ class BookingController extends Controller
             dealers.nama_dealer,
             dealers.kode_dealer,
             bookings.jenis_transmisi,
-            bookings.tgl_booking,
+            bookings.tgl_service,
             bookings.jenis_pekerjaan,
             bookings.jenis_layanan,
             bookings.keterangan_customer,
@@ -168,7 +199,7 @@ class BookingController extends Controller
             'id_kendaraan'=>'required',
             'jenis_transmisi'=>'required',
             'id_dealer'=>'required',
-            'tgl_booking'=>'required',
+            'tgl_service'=>'required',
             'jenis_pekerjaan'=>'required',
             'jenis_layanan'=>'required'
         ],['nama_customer.required'=>'Nama lengkap wajib diisi',
@@ -179,7 +210,7 @@ class BookingController extends Controller
         'id_kendaraan.required'=>'Model kendaraan wajib diisi',
         'jenis_transmisi.required'=>'Jenis transmisi kendaraan wajib diisi',
         'id_dealer.required'=>'Pilihan dealer wajib diisi',
-        'tgl_booking.required'=>'Tanggal dan Jam Booking wajib diisi',
+        'tgl_service.required'=>'Tanggal service wajib diisi',
         'jenis_kendaraan.required'=>'Jenis pekerjaan wajib diisi',
         'jenis_layanan.required'=>'Jenis layanan wajib diisi']);
        
@@ -195,11 +226,11 @@ class BookingController extends Controller
         $booking->id_kendaraan = $updateBooking['id_kendaraan'];
         $booking->jenis_transmisi = $updateBooking['jenis_transmisi'];
         $booking->id_dealer = $updateBooking['id_dealer'];
-        $booking->tgl_booking = $updateBooking['tgl_booking'];
+        $booking->tgl_service = $updateBooking['tgl_service'];
         $booking->jenis_pekerjaan = $updateBooking['jenis_pekerjaan'];
         $booking->jenis_layanan = $updateBooking['jenis_layanan'];
         $booking->keterangan_customer = $updateBooking['keterangan_customer'];
-        $booking->keterangan_cco = $updateBooking['keterangan_cco'];
+        // $booking->keterangan_cco = $updateBooking['keterangan_cco'];
 
         if($booking->save()){
             //Logging ke tabel Logs
@@ -245,6 +276,24 @@ class BookingController extends Controller
             'message' => 'Gagal mengubah status booking',
             'data'=> null
         ],400);
+    }
+
+    public function getBookingLog()
+    {
+        $logs = Log::all();
+
+        if(count($logs)>0){
+            return response([
+                'message' => 'Log berhasil ditampilkan',
+                'data' => $logs
+            ], 200);
+        }
+
+        return response([
+                'message' => 'Log tidak ditemukan',
+                'data' => null
+        ], 404);
+        
     }
 
 }

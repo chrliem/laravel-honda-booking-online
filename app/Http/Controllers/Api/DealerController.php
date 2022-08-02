@@ -12,28 +12,7 @@ class DealerController extends Controller
 
     public function show($id)
     {
-        $booking = Booking::selectRaw(
-            'bookings.kode_booking,
-            bookings.nama_customer,
-            bookings.email_customer,
-            bookings.no_handphone,
-            bookings.no_polisi,
-            kendaraans.model_kendaraan,
-            bookings.jenis_transmisi,
-            dealers.nama_dealer,
-            dealers.kode_dealer,
-            bookings.jenis_transmisi,
-            bookings.tgl_booking,
-            bookings.jenis_pekerjaan,
-            bookings.jenis_layanan,
-            bookings.keterangan_customer,
-            bookings.status,
-            bookings.keterangan_cco,
-            bookings.created_at')
-            ->leftJoin('dealers','bookings.id_dealer','=','dealers.id_dealer')
-            ->leftJoin('kendaraans','bookings.id_kendaraan','=','kendaraans.id_kendaraan')
-            ->where('bookings.id_dealer',$id)
-            ->get();
+        $booking = Booking::where('id_dealer',$id)->orderBy('created_at','DESC')->get();
         
         if(count($booking)>0){
             return response([
@@ -48,5 +27,35 @@ class DealerController extends Controller
         ], 404);
     }
 
+    public function getDealer($id){
+        $dealer = Dealer::find($id);
+
+        if(!is_null($dealer)){
+            return response([
+                'message' => 'Dealer berhasil ditampilkan',
+                'data'=>$dealer
+            ],200);
+        }
+
+        return response([
+            'message' => 'Dealer tidak ditemukan',
+            'data' => null
+        ], 404);
+    }
+
+    public function index(){
+        $dealers = Dealer::all();
+        if(count($dealers)>0){
+            return response([
+                'message' => 'Data Dealer Berhasil Diperoleh',
+                'data' => $dealers
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Belum ada data',
+            'data' => null
+        ], 404);
+    }
 
 }

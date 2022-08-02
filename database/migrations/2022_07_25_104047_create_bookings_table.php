@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kendaraan');
             $table->string('jenis_transmisi');
             $table->unsignedBigInteger('id_dealer');
-            $table->dateTime('tgl_booking');
+            $table->dateTime('tgl_service');
             $table->string('jenis_pekerjaan');
             $table->string('jenis_layanan');
             $table->string('keterangan_customer')->nullable();
