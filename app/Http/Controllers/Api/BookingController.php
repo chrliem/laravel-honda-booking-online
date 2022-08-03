@@ -124,7 +124,7 @@ class BookingController extends Controller
         foreach($users as $recipient){
             Mail::to($recipient->email)->send(new NotificationEmail($data));
         }
-        
+
         //Tidak jadi digunakan
         // broadcast(new BookingAdded($data));
 
