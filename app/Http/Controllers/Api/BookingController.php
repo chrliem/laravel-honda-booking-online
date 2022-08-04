@@ -109,7 +109,7 @@ class BookingController extends Controller
             'kode_booking'=>$newBooking['kode_booking'],
             'nama_customer'=>$newBooking['nama_customer'],
             'email_customer'=>$newBooking['email_customer'],
-        'no_handphone'=>$newBooking['no_handphone'],
+            'no_handphone'=>$newBooking['no_handphone'],
             'no_polisi'=> $newBooking['no_polisi'],
             'model_kendaraan'=>$kendaraan->model_kendaraan,
             'jenis_transmisi'=>$newBooking['jenis_transmisi'],
