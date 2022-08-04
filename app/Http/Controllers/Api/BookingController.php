@@ -86,7 +86,7 @@ class BookingController extends Controller
         }
         //Get kode dealer
         $dealer = Dealer::find($request->id_dealer);
-        //Get current date in DDMM format
+        //Get current date in DDMM format 
         $date = Carbon::now()->format('dm');
         //Concatenating kode booking (Contoh: HSB.BOOK.2507.000001)
         $newBooking['kode_booking'] = $dealer->kode_dealer.'.BOOK.'.$date.'.'.$formattedNum;
