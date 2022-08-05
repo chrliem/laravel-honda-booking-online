@@ -25,7 +25,8 @@ class AuthController extends Controller
     }
 
     public function login(Request $request){
-        $login = $request->all();
+        // $login = $request->all();
+        $login = $request->only(['email', 'password']);
         
         if(!Auth::attempt($login))
             return response(['message' => 'Email/Password salah atau belum terdaftar'], 401);
