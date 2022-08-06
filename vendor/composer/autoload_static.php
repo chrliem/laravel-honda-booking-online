@@ -720,6 +720,7 @@ class ComposerStaticInit6b5539459500fdccb7d702a715dab707
         'App\\Http\\Controllers\\Api\\EmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/EmailController.php',
         'App\\Http\\Controllers\\Api\\KendaraanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/KendaraanController.php',
         'App\\Http\\Controllers\\Api\\LogController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/LogController.php',
+        'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

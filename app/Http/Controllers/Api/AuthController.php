@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function register(Request $request){
-        $user = $request->all();
+        $user = $request->only(['nama','email','password','id_dealer','id_role']);
 
         $user['password'] = bcrypt($request->password);
 
@@ -40,5 +40,8 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'access_token' => $token
         ]);
+
+        
     }
+
 }

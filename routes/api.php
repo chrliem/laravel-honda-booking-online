@@ -19,12 +19,16 @@ use App\Events\BookingAdded;
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
 Route::group(['middleware'=>'auth:api'], function(){
+    // Route::post('register', 'Api\AuthController@register');
     Route::get('booking','Api\BookingController@index');
     Route::get('booking/{id}','Api\BookingController@show');
     Route::get('booking-filtered/{id}','Api\DealerController@show');
     Route::post('booking/{id}','Api\BookingController@update');
     Route::post('booking-status/{id}','Api\BookingController@changeStatus');
     Route::get('booking-log','Api\BookingController@getBookingLog');
+    Route::get('user','Api\UserController@index');
+    Route::post('user-password/{id}','Api\UserController@changePassword');
+    Route::delete('user/{id}','Api\UserController@delete');
 });
 
 Route::post('booking','Api\BookingController@create');

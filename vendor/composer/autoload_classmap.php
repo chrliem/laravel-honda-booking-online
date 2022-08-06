@@ -15,6 +15,7 @@ return array(
     'App\\Http\\Controllers\\Api\\EmailController' => $baseDir . '/app/Http/Controllers/Api/EmailController.php',
     'App\\Http\\Controllers\\Api\\KendaraanController' => $baseDir . '/app/Http/Controllers/Api/KendaraanController.php',
     'App\\Http\\Controllers\\Api\\LogController' => $baseDir . '/app/Http/Controllers/Api/LogController.php',
+    'App\\Http\\Controllers\\Api\\UserController' => $baseDir . '/app/Http/Controllers/Api/UserController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

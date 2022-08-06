@@ -23,6 +23,8 @@ class User extends Authenticatable
         'nama',
         'email',
         'password',
+        'id_dealer',
+        'id_role'
     ];
 
     /**

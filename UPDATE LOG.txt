@@ -1,0 +1,11 @@
+UPDATE 6 Agustus 2022
+---------------------------
+Laravel:
+Perubahan kolom pada table User. Kolom baru: id_dealer (FK), id_role (FK)
+Table baru Roles
+
+Vue:
+Dashboard User untuk user dengan role IT
+Action: Add user, Edit password dan Delete user oleh user dengan role IT
+Pemisahan login IT dan Admin
+Penambahan function reset form pada BookingDashboard.vue
