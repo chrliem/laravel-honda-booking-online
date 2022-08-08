@@ -18,3 +18,4 @@ Perbaikan link pada button email
 
 Vue:
 UserDashboard: Tambahan kolom role
+Logo Bintang Group
