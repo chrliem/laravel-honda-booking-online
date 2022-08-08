@@ -18,7 +18,7 @@ class UserController extends Controller
             dealers.nama_dealer,
             roles.role')
         ->leftJoin('dealers','users.id_dealer','=','dealers.id_dealer')
-        ->leftJoin('roles','users.id','=','roles.id')
+        ->leftJoin('roles','users.id_role','=','roles.id')
         ->get();
         if(!is_null($users)){
             return response([
