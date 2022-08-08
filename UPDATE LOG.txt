@@ -15,6 +15,7 @@ UPDATE 1 | 8 Agustus 2022
 Laravel:
 UserController: tambahan select role untuk tampil role pada front-end
 Perbaikan link pada button email
+Perubahan query karena kesalahan fk pada UserController
 
 Vue:
 UserDashboard: Tambahan kolom role
