@@ -9,3 +9,12 @@ Dashboard User untuk user dengan role IT
 Action: Add user, Edit password dan Delete user oleh user dengan role IT
 Pemisahan login IT dan Admin
 Penambahan function reset form pada BookingDashboard.vue
+
+UPDATE 1 | 8 Agustus 2022
+---------------------------
+Laravel:
+UserController: tambahan select role untuk tampil role pada front-end
+Perbaikan link pada button email
+
+Vue:
+UserDashboard: Tambahan kolom role

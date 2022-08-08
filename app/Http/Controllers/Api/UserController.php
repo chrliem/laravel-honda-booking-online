@@ -15,8 +15,10 @@ class UserController extends Controller
         $users = User::selectRaw('users.id,
             users.nama, 
             users.email,    
-            dealers.nama_dealer')
+            dealers.nama_dealer,
+            roles.role')
         ->leftJoin('dealers','users.id_dealer','=','dealers.id_dealer')
+        ->leftJoin('roles','users.id','=','roles.id')
         ->get();
         if(!is_null($users)){
             return response([
