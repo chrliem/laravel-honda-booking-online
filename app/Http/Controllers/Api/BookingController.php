@@ -125,9 +125,6 @@ class BookingController extends Controller
             Mail::to($recipient->email)->send(new NotificationEmail($data, $recipient->nama));
         }
 
-        //Tidak jadi digunakan
-        // broadcast(new BookingAdded($data));
-
         return response([
             'message'=>'Booking berhasil dibuat',
             'data'=>$booking

@@ -20,3 +20,9 @@ Perubahan query karena kesalahan fk pada UserController
 Vue:
 UserDashboard: Tambahan kolom role
 Logo Bintang Group
+
+UPDATE 9 Agustus 2022
+--------------------------
+Vue:
+Update bug keterangan CCO menjadi tertulis null ketika kosong saat edit data oleh CCO
+Penyeragaman style snackbar
