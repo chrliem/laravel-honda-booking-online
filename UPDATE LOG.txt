@@ -27,3 +27,6 @@ Vue:
 Update bug keterangan CCO menjadi tertulis null ketika kosong saat edit data oleh CCO
 Penyeragaman style snackbar
 Penambahan tampilan pada Booking Dashboard jika belum ada data booking
+
+Database:
+Penambahan data Dealer
