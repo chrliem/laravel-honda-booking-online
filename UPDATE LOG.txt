@@ -30,3 +30,8 @@ Penambahan tampilan pada Booking Dashboard jika belum ada data booking
 
 Database:
 Penambahan data Dealer
+
+UPDATE 10 Agustus 2022
+-----------------------
+Vue:
+Perbaikan masalah tampilan https://prnt.sc/ABkN_ZYhRuwB 
