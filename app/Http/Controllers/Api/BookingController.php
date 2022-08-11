@@ -129,10 +129,10 @@ class BookingController extends Controller
         ];
 
         /* Comment line 131-134 jika testing di localhhost dan uncomment jika deploy */
-        // $users = User::all();
-        // foreach($users as $recipient){
-        //     Mail::to($recipient->email)->send(new NotificationEmail($data, $recipient->nama));
-        // }
+        $users = User::all();
+        foreach($users as $recipient){
+            Mail::to($recipient->email)->send(new NotificationEmail($data, $recipient->nama));
+        }
 
         //Format menjadi 628XXXXXXXXX
         $formattedNoHP = $booking->no_handphone;
