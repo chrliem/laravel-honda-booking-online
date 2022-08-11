@@ -113,12 +113,12 @@ class BookingController extends Controller
 
         //Send email
         $data = [
-            'kode_booking'=>$booking->kode_booking,
+            'kode_booking'=>$newBooking['kode_booking'],
             'nama_customer'=>$booking->nama_customer,
             'email_customer'=>$booking->email_customer,
             'no_handphone'=>$booking->no_handphone,
             'no_polisi'=> $booking->no_polisi,
-            'model_kendaraan'=>$booking->model_kendaraan,
+            'model_kendaraan'=>$kendaraan->model_kendaraan,
             'no_rangka'=>$booking->no_rangka,
             'kode_dealer'=>$dealer->kode_dealer,
             'nama_dealer'=>$dealer->nama_dealer,
