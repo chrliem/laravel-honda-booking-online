@@ -32,6 +32,8 @@ return array(
     'App\\Models\\Kendaraan' => $baseDir . '/app/Models/Kendaraan.php',
     'App\\Models\\Log' => $baseDir . '/app/Models/Log.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\WhatsappInstance' => $baseDir . '/app/Models/WhatsappInstance.php',
+    'App\\Models\\WhatsappTemplate' => $baseDir . '/app/Models/WhatsappTemplate.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

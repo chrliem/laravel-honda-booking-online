@@ -29,6 +29,14 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::get('user','Api\UserController@index');
     Route::post('user-password/{id}','Api\UserController@changePassword');
     Route::delete('user/{id}','Api\UserController@delete');
+    Route::get('wa-instance','Api\WhatsappInstanceController@index');
+    Route::post('wa-instance/{id}','Api\WhatsappInstanceController@edit');
+    Route::post('wa-instance','Api\WhatsappInstanceController@create');
+    Route::delete('wa-instance/{id}','Api\WhatsappInstanceController@delete');
+    Route::get('wa-template','Api\WhatsappTemplateController@index');
+    Route::post('wa-template/{id}','Api\WhatsappTemplateController@edit');
+    Route::post('wa-template','Api\WhatsappTemplateController@create');
+    Route::delete('wa-template/{id}','Api\WhatsappTemplateController@delete');
 });
 
 Route::post('booking','Api\BookingController@create');

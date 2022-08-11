@@ -10,12 +10,19 @@ use App\Models\Booking;
 use App\Models\Dealer;
 use App\Models\Kendaraan;
 use App\Models\Log;
+use App\Models\WhatsappInstance;
+use App\Models\WhatsappTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Validator;
 use App\Events\BookingAdded;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
+
+
 
 class BookingController extends Controller
 {
@@ -106,29 +113,71 @@ class BookingController extends Controller
 
         //Send email
         $data = [
-            'kode_booking'=>$newBooking['kode_booking'],
-            'nama_customer'=>$newBooking['nama_customer'],
-            'email_customer'=>$newBooking['email_customer'],
-            'no_handphone'=>$newBooking['no_handphone'],
-            'no_polisi'=> $newBooking['no_polisi'],
-            'model_kendaraan'=>$kendaraan->model_kendaraan,
-            'jenis_transmisi'=>$newBooking['jenis_transmisi'],
+            'kode_booking'=>$booking->kode_booking,
+            'nama_customer'=>$booking->nama_customer,
+            'email_customer'=>$booking->email_customer,
+            'no_handphone'=>$booking->no_handphone,
+            'no_polisi'=> $booking->no_polisi,
+            'model_kendaraan'=>$booking->model_kendaraan,
+            'jenis_transmisi'=>$booking->jenis_transmisi,
             'kode_dealer'=>$dealer->kode_dealer,
             'nama_dealer'=>$dealer->nama_dealer,
-            'tgl_service'=>$newBooking['tgl_service'],
-            'jenis_pekerjaan'=>$newBooking['jenis_pekerjaan'],
-            'jenis_layanan'=>$newBooking['jenis_layanan'],
-            'keterangan_customer'=>$newBooking['keterangan_customer']
+            'tgl_service'=>$booking->tgl_service,
+            'jenis_pekerjaan'=>$booking->jenis_pekerjaan,
+            'jenis_layanan'=>$booking->jenis_layanan,
+            'keterangan_customer'=>$booking->keterangan_customer
         ];
-        $users = User::all();
-        foreach($users as $recipient){
-            Mail::to($recipient->email)->send(new NotificationEmail($data, $recipient->nama));
-        }
 
-        return response([
-            'message'=>'Booking berhasil dibuat',
-            'data'=>$booking
-        ], 200);
+        /* Comment line 131-134 jika testing di localhhost dan uncomment jika deploy */
+        // $users = User::all();
+        // foreach($users as $recipient){
+        //     Mail::to($recipient->email)->send(new NotificationEmail($data, $recipient->nama));
+        // }
+
+        //Format menjadi 628XXXXXXXXX
+        $formattedNoHP = $booking->no_handphone;
+        $formattedNoHP = Str::substr($formattedNoHP,1);
+        $formattedNoHP = '62'.$formattedNoHP;
+        
+        //Send message ke Whatsapp Customer
+        $instance = WhatsappInstance::where('id_dealer',$booking->id_dealer)->first();
+        if(!is_null($instance)){
+            $template = WhatsappTemplate::where('instance_id', $instance->instance_id)->first();
+
+            $client = new \GuzzleHttp\Client(['base_uri'=>'https://api.chat-api.com/']);
+ 
+            $response = $client->request('POST',"instance$template->instance_id/sendTemplate?token=$instance->token",
+            [
+                'json' => [
+                        'namespace'=>$template->namespace,
+                        'template'=>$template->template_name,
+                        'language'=> array(
+                                'policy'=>'deterministic',
+                                'code'=>'id'
+                        ),
+                        'params'=>array([
+                            'type'=>'body',
+                            'parameters'=>array([
+                                'type'=>'text',
+                                'text'=> $booking->nama_customer
+                            ])  
+                         ]),
+                        'phone'=>$formattedNoHP
+                    ],
+            ]);
+    
+            return response([
+                'message'=>'Booking berhasil dibuat',
+                'data'=>$booking,
+                'chat_api'=> json_decode($response->getBody())
+            ], 200);
+        }else{
+            return response([
+                'message'=>'Booking berhasil dibuat',
+                'data'=>$booking
+            ]);
+        }
+        
 
     }
 

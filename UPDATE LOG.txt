@@ -33,5 +33,21 @@ Penambahan data Dealer
 
 UPDATE 10 Agustus 2022
 -----------------------
+Laravel:
+Composer require Guzzle
+Penambahan integrasi dengan ChatAPI di BookingController
+
 Vue:
 Perbaikan masalah tampilan https://prnt.sc/ABkN_ZYhRuwB 
+
+UPDATE 11 Agustus 2022
+----------------------
+Laravel:
+Table baru WhatsappInstances dan WhatsappTemplates
+WhatsappInstanceController dan WhatsappTemplateController
+Update pd Booking model dimana terdapat kesalahan atribut fillable semula 'email' menjadi 'email_customer' dan menyebabkan email customer tidak masuk ke Database
+Integrasi dengan ChatApi di booking controller dengan query ke Database untuk komponen instance dan template
+
+Vue:
+Dashboard Whatsapp untuk mengelola WhatsappInstance dan WhatsappTemplate bagi tim IT dan CRUD
+Perubahan validasi phonenumber untuk nomor hp 13 digit

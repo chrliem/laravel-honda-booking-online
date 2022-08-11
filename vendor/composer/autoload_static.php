@@ -737,6 +737,8 @@ class ComposerStaticInit6b5539459500fdccb7d702a715dab707
         'App\\Models\\Kendaraan' => __DIR__ . '/../..' . '/app/Models/Kendaraan.php',
         'App\\Models\\Log' => __DIR__ . '/../..' . '/app/Models/Log.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\WhatsappInstance' => __DIR__ . '/../..' . '/app/Models/WhatsappInstance.php',
+        'App\\Models\\WhatsappTemplate' => __DIR__ . '/../..' . '/app/Models/WhatsappTemplate.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
