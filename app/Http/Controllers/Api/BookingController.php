@@ -56,7 +56,7 @@ class BookingController extends Controller
             'no_handphone'=>'required|numeric|digits_between:1,13|regex:/^((08))/',
             'no_polisi'=>'required',
             'id_kendaraan'=>'required',
-            'jenis_transmisi'=>'required',
+            'no_rangka'=>'required',
             'id_dealer'=>'required',
             'tgl_service'=>'required',
             'jenis_pekerjaan'=>'required',
@@ -67,7 +67,7 @@ class BookingController extends Controller
         'no_handphone.regex'=>'Format nomor handphone tidak sesuai',
         'no_polisi.required'=>'Nomor polisi wajib diisi',
         'id_kendaraan.required'=>'Model kendaraan wajib diisi',
-        'jenis_transmisi.required'=>'Jenis transmisi kendaraan wajib diisi',
+        'no_rangka.required'=>'Nomor rangka kendaraan wajib diisi',
         'id_dealer.required'=>'Pilihan dealer wajib diisi',
         'tgl_service.required'=>'Tanggal service wajib diisi',
         'jenis_kendaraan.required'=>'Jenis pekerjaan wajib diisi',
@@ -119,7 +119,7 @@ class BookingController extends Controller
             'no_handphone'=>$booking->no_handphone,
             'no_polisi'=> $booking->no_polisi,
             'model_kendaraan'=>$booking->model_kendaraan,
-            'jenis_transmisi'=>$booking->jenis_transmisi,
+            'no_rangka'=>$booking->no_rangka,
             'kode_dealer'=>$dealer->kode_dealer,
             'nama_dealer'=>$dealer->nama_dealer,
             'tgl_service'=>$booking->tgl_service,
@@ -191,10 +191,9 @@ class BookingController extends Controller
             bookings.no_handphone,
             bookings.no_polisi,
             kendaraans.model_kendaraan,
-            bookings.jenis_transmisi,
+            bookings.no_rangka,
             dealers.nama_dealer,
             dealers.kode_dealer,
-            bookings.jenis_transmisi,
             bookings.tgl_service,
             bookings.jenis_pekerjaan,
             bookings.jenis_layanan,
@@ -212,13 +211,13 @@ class BookingController extends Controller
                 'message' => 'Booking berhasil ditampilkan',
                 'data' => $booking
             ], 200);
-        }
+        }else{
 
-        return response([
-                'message' => 'Booking tidak ditemukan',
-                'data' => null
-        ], 404);
-        
+            return response([
+                    'message' => 'Booking tidak ditemukan',
+                    'data' => null
+            ], 404);
+        }
             
     }
 
@@ -243,7 +242,7 @@ class BookingController extends Controller
             'no_handphone'=>'required|numeric|digits_between:1,13|regex:/^((08))/',
             'no_polisi'=>'required',
             'id_kendaraan'=>'required',
-            'jenis_transmisi'=>'required',
+            'no_rangka'=>'required',
             'id_dealer'=>'required',
             'tgl_service'=>'required',
             'jenis_pekerjaan'=>'required',
@@ -254,7 +253,7 @@ class BookingController extends Controller
         'no_handphone.regex'=>'Format nomor handphone tidak sesuai',
         'no_polisi.required'=>'Nomor polisi wajib diisi',
         'id_kendaraan.required'=>'Model kendaraan wajib diisi',
-        'jenis_transmisi.required'=>'Jenis transmisi kendaraan wajib diisi',
+        'no_rangka.required'=>'Nomor rangka kendaraan wajib diisi',
         'id_dealer.required'=>'Pilihan dealer wajib diisi',
         'tgl_service.required'=>'Tanggal service wajib diisi',
         'jenis_kendaraan.required'=>'Jenis pekerjaan wajib diisi',
@@ -270,7 +269,7 @@ class BookingController extends Controller
         $booking->no_handphone = $updateBooking['no_handphone'];
         $booking->no_polisi = $updateBooking['no_polisi'];
         $booking->id_kendaraan = $updateBooking['id_kendaraan'];
-        $booking->jenis_transmisi = $updateBooking['jenis_transmisi'];
+        $booking->no_rangka = $updateBooking['no_rangka'];
         $booking->id_dealer = $updateBooking['id_dealer'];
         $booking->tgl_service = $updateBooking['tgl_service'];
         $booking->jenis_pekerjaan = $updateBooking['jenis_pekerjaan'];

@@ -19,7 +19,7 @@ class Booking extends Model
         'no_handphone',
         'no_polisi',
         'id_kendaraan',
-        'jenis_transmisi',
+        'no_rangka',
         'id_dealer',
         'tgl_service',
         'jam_service',

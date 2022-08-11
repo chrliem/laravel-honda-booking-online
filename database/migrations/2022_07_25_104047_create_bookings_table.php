@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('no_handphone');
             $table->string('no_polisi');
             $table->unsignedBigInteger('id_kendaraan');
-            $table->string('jenis_transmisi');
+            $table->string('no_rangka');
             $table->unsignedBigInteger('id_dealer');
             $table->dateTime('tgl_service');
             $table->string('jenis_pekerjaan');
