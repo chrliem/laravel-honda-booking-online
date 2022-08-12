@@ -54,3 +54,13 @@ Dashboard Whatsapp untuk mengelola WhatsappInstance dan WhatsappTemplate bagi ti
 Perubahan validasi phonenumber untuk nomor hp 13 digit
 Penggantian field jenis transmisi (autocomplete) menjadi no rangka (textfield)
 Perubahan tampilan dashboard untuk item jenis transmisi menjadi no rangka
+
+UPDATE 12 Agustus 2022
+----------------------
+Laravel:
+Penambahan Create, Update, Delete untuk Dealer
+Penambahan Create, Update, Delete untuk Kendaraan
+
+Vue:
+Penambahan CRUDS untuk Dealer
+Penambahan CRUDS untuk Kendaraan

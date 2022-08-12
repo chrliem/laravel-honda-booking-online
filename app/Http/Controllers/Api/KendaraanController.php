@@ -41,5 +41,59 @@ class KendaraanController extends Controller
         ], 404);
     }
 
+    public function create(Request $request){
+        $newData = $request->all();
+
+        $newData = Kendaraan::create($newData);
+        return response([
+            'message'=>'Tambah Kendaraan berhasil',
+            'data'=> $newData
+        ], 200);
+    }
+
+    public function edit(Request $request, $id){
+        $kendaraan = Kendaraan::find($id);
+        if(is_null($kendaraan)){
+            return response([
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+
+        $updateData = $request->all();
+
+        $kendaraan->model_kendaraan = $updateData['model_kendaraan'];
+
+        if($kendaraan->save()){
+            return response([
+                'message'=>'Data berhasil diubah',
+                'data'=>$kendaraan
+            ], 200);
+        }
+
+    }
+
+    public function delete($id){
+        $kendaraan = Kendaraan::find($id);
+
+        if(is_null($kendaraan)){
+            return response([
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404); 
+        }
+
+        if($kendaraan->delete()){
+            return response([
+                'message' => 'Data berhasil dihapus',
+                'data' => null
+            ],200);
+        }
+
+        return response([
+            'message' => 'Gagal menghapus data',
+            'data' => null
+        ], 400); 
+    }
     
 }
