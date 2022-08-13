@@ -64,3 +64,11 @@ Penambahan Create, Update, Delete untuk Kendaraan
 Vue:
 Penambahan CRUDS untuk Dealer
 Penambahan CRUDS untuk Kendaraan
+
+UPDATE 13 Agustus 2022
+----------------------
+Vue:
+Penambahan rule pada datepicker tanggal service dimana:
+Jika booking dilakukan setelah jam 3 sore, tanggal service keesokannya terdisable
+Semua hari minggu terdisable
+Field jam service terdisable jika tgl service belum dipilih
