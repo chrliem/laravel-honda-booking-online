@@ -21,7 +21,7 @@ use App\Events\BookingAdded;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class BookingController extends Controller
@@ -56,7 +56,7 @@ class BookingController extends Controller
             'no_handphone'=>'required|numeric|digits_between:1,13|regex:/^((08))/',
             'no_polisi'=>'required',
             'id_kendaraan'=>'required',
-            'no_rangka'=>'required',
+            'no_rangka',
             'id_dealer'=>'required',
             'tgl_service'=>'required',
             'jenis_pekerjaan'=>'required',
@@ -98,6 +98,14 @@ class BookingController extends Controller
         //Concatenating kode booking (Contoh: HSB.BOOK.2507.000001)
         $newBooking['kode_booking'] = $dealer->kode_dealer.'.BOOK.'.$date.'.'.$formattedNum;
 
+        //Simpan gambar
+        if(!is_null($request->file('no_rangka_image'))){
+            $image = $request->file('no_rangka_image');
+            $fileName = Carbon::now()->toDateString().uniqid();
+            (Storage::putFileAs('public/no_rangka_image',$image, $fileName.'.'.$image->getClientOriginalExtension()));
+            $newBooking['no_rangka_image'] = $fileName.'.'.$image->getClientOriginalExtension();
+        }
+        
         //Set status
         $newBooking['status'] = 'New';
 
