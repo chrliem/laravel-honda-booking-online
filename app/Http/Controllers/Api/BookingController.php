@@ -127,6 +127,7 @@ class BookingController extends Controller
             'no_handphone'=>$booking->no_handphone,
             'no_polisi'=> $booking->no_polisi,
             'model_kendaraan'=>$kendaraan->model_kendaraan,
+            'no_rangka_image'=>$booking->no_rangka_image,
             'no_rangka'=>$booking->no_rangka,
             'kode_dealer'=>$dealer->kode_dealer,
             'nama_dealer'=>$dealer->nama_dealer,
