@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function register(Request $request){
-        $user = $request->only(['nama','email','password','id_dealer','id_role']);
-
+        // $user = $request->only(['nama','email','password','id_dealer','id_role','no_handphone']);
+        $user = $request->all();
         $user['password'] = bcrypt($request->password);
 
         $user = User::create($user);

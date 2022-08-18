@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::get('booking-log','Api\BookingController@getBookingLog');
     Route::get('user','Api\UserController@index');
     Route::post('user-password/{id}','Api\UserController@changePassword');
+    Route::post('user/{id}','Api\UserController@edit');
     Route::delete('user/{id}','Api\UserController@delete');
     Route::get('wa-instance','Api\WhatsappInstanceController@index');
     Route::post('wa-instance/{id}','Api\WhatsappInstanceController@edit');

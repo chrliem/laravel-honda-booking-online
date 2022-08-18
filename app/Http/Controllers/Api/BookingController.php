@@ -137,10 +137,37 @@ class BookingController extends Controller
             'keterangan_customer'=>$booking->keterangan_customer
         ];
 
+        $instance = WhatsappInstance::where('id_dealer',$booking->id_dealer)->first();
         /* Comment line 131-134 jika testing di localhhost dan uncomment jika deploy */
-        $users = User::all();
+        // $users = User::all();
+        $users = User::where('id_dealer',$booking->id_dealer)->get();
         foreach($users as $recipient){
+            //Email notification ke CCO sesuai cabang
             Mail::to($recipient->email)->send(new NotificationEmail($data, $recipient->nama));
+            //Send message ke Whatsapp CCO
+            if(!is_null($instance)){
+                $template = WhatsappTemplate::where('instance_id', $instance->instance_id,'and')->where('template_name','booking')->first();
+                $client = new \GuzzleHttp\Client(['base_uri'=>'https://api.chat-api.com/']);
+                $response = $client->request('POST',"instance$template->instance_id/sendTemplate?token=$instance->token",
+                [
+                    'json' => [
+                            'namespace'=>$template->namespace,
+                            'template'=>$template->template_name,
+                            'language'=> array(
+                                    'policy'=>'deterministic',
+                                    'code'=>'id'
+                            ),
+                            'params'=>array([
+                                'type'=>'body',
+                                'parameters'=>array([
+                                    'type'=>'text',
+                                    'text'=> $booking->nama_customer
+                                ])  
+                             ]),
+                            'phone'=>'62'.Str::substr($recipient->no_handphone,1)
+                        ],
+                ]);
+            }
         }
 
         //Format menjadi 628XXXXXXXXX
@@ -149,9 +176,8 @@ class BookingController extends Controller
         $formattedNoHP = '62'.$formattedNoHP;
         
         //Send message ke Whatsapp Customer
-        $instance = WhatsappInstance::where('id_dealer',$booking->id_dealer)->first();
         if(!is_null($instance)){
-            $template = WhatsappTemplate::where('instance_id', $instance->instance_id)->first();
+            $template = WhatsappTemplate::where('instance_id', $instance->instance_id,'and')->where('template_name','booking')->first();
 
             $client = new \GuzzleHttp\Client(['base_uri'=>'https://api.chat-api.com/']);
  
