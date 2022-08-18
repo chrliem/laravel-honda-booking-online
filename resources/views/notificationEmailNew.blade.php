@@ -73,7 +73,7 @@
                             <tr>
                                 <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 15px; line-height: 18px; padding: 10px 0;"><strong>Nomor Rangka</strong></td>
                                 @if(is_null($data['no_rangka']))
-                                <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 15px; line-height: 18px; padding: 10px 0;">{{$data['no_rangka_image']}}</td>
+                                <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 15px; line-height: 18px; padding: 10px 0;">https://be.bintang-group.co.id/storage/no_rangka_image/{{$data['no_rangka_image']}}</td>
                                 @else
                                 <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 15px; line-height: 18px; padding: 10px 0;">{{$data['no_rangka']}}</td>
                                 @endif
