@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 use App\Mail\NotificationEmail;
+use App\Mail\NotificationCustomer;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -136,7 +137,7 @@ class BookingController extends Controller
             'jenis_layanan'=>$booking->jenis_layanan,
             'keterangan_customer'=>$booking->keterangan_customer
         ];
-
+        Mail::to($booking->email_customer)->send(new NotificationCustomer($data, $booking->nama_customer));
         $instance = WhatsappInstance::where('id_dealer',$booking->id_dealer)->first();
         /* Comment line 131-134 jika testing di localhhost dan uncomment jika deploy */
         // $users = User::all();

@@ -35,7 +35,7 @@
             <!-- <a href="{!! URL::to('/') !!}"> -->
                 <!-- <img src="/asset/Honda.png" /> -->
             <!-- </a> -->
-            <h1> Honda Online Booking Service </h1>
+            <h1> Honda Bintang Group Online Booking Service </h1>
         </td>
     </tr>
 <!-- Email Body --><tr>
@@ -115,8 +115,8 @@
                                 </tr></table>
                             </td>
                             </tr></table>
-                            <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Thanks,<br>
-                            Honda Online Booking Service</p>
+                            <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Terima kasih,<br>
+                            Honda Bintang Group Online Booking Service</p>
                     </td>
                 </tr>
             </table>
