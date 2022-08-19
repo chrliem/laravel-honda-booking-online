@@ -23,7 +23,7 @@ class NotificationCustomer extends Mailable
 
     public function build()
     {
-        return $this->subject($this->data['nama_dealer'] .' Online Booking Service')->view('notificationEmail')->with('data', $this->data)->with('nama', $this->nama);
+        return $this->subject($this->data['nama_dealer'] .' Online Booking Service')->view('notificationemail')->with('data', $this->data)->with('nama', $this->nama);
     }
 }
 
