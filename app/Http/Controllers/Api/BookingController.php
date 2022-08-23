@@ -30,13 +30,36 @@ class BookingController extends Controller
     //Tampil semua data tanpa filter (Untuk keperluan testing)
     public function index()
     {
-        $bookings = Booking::all();
-        if(count($bookings)>0){
-            return response([
-                'message' => 'Data Booking Berhasil Ditampilkan',
-                'data' => $bookings
-            ], 200);
-        }
+        // $bookings = Booking::all();
+        // if(count($bookings)>0){
+        //     return response([
+        //         'message' => 'Data Booking Berhasil Ditampilkan',
+        //         'data' => $bookings
+        //     ], 200);
+        // }
+        $bookings = Booking::selectRaw(
+            'bookings.kode_booking,
+            bookings.nama_customer,
+            bookings.no_polisi,
+            kendaraans.model_kendaraan,
+            dealers.nama_dealer,
+            dealers.kode_dealer,
+            bookings.tgl_service,
+            bookings.jenis_pekerjaan,
+            bookings.jenis_layanan,
+            bookings.status,
+            bookings.created_at')
+            ->leftJoin('dealers','bookings.id_dealer','=','dealers.id_dealer')
+            ->leftJoin('kendaraans','bookings.id_kendaraan','=','kendaraans.id_kendaraan')
+            ->orderBy('created_at','DESC')
+            ->get();
+        
+            if(count($bookings)>0){
+                return response([
+                    'message' => 'Data Booking Berhasil diperoleh',
+                    'data' => $bookings
+                ], 200);
+            }
 
         return response([
             'message' => 'Belum ada data',
